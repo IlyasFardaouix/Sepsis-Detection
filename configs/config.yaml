@@ -1,0 +1,53 @@
+# Configuration file for Sepsis Detection Project
+
+data:
+  raw_data_path: "data/raw/sepsis_data.csv"
+  processed_data_path: "data/processed/sepsis_processed.csv"
+  train_test_split: 0.2
+  random_seed: 42
+  validation_split: 0.2
+
+features:
+  time_window_hours: 6  # Time window for feature extraction
+  lookback_hours: 24  # How far back to look for time-series features
+  include_static_features: true
+  include_temporal_features: true
+  feature_selection: true
+  max_features: 100
+
+model:
+  algorithm: "xgboost"  # Options: xgboost, lightgbm, catboost
+  objective: "binary:logistic"
+  eval_metric: "auc"
+  early_stopping_rounds: 50
+  n_estimators: 1000
+  max_depth: 6
+  learning_rate: 0.01
+  subsample: 0.8
+  colsample_bytree: 0.8
+  min_child_weight: 3
+  scale_pos_weight: null  # Auto-calculate if null
+  use_gpu: false
+
+imbalanced_learning:
+  method: "smote"  # Options: smote, adasyn, smoteenn, class_weight, none
+  k_neighbors: 5
+  sampling_strategy: "auto"  # auto, 0.5 (for 50% ratio), etc.
+
+training:
+  n_folds: 5
+  shuffle: true
+  stratified: true
+  save_model: true
+  model_save_path: "models/sepsis_model.pkl"
+  feature_importance_path: "results/feature_importance.png"
+
+evaluation:
+  metrics: ["roc_auc", "precision", "recall", "f1", "average_precision"]
+  save_plots: true
+  plots_path: "results/"
+
+logging:
+  log_level: "INFO"
+  log_file: "logs/sepsis_detection.log"
+
