@@ -1,8 +1,5 @@
-```python
-# Import necessary modules
 from .config_loader import load_config
 from .logger import setup_logger
 
-# Define the public API of this module
 __all__ = ['load_config', 'setup_logger']
-```
+
