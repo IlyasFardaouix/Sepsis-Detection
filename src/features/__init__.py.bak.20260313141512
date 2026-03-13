@@ -1,8 +1,5 @@
-```python
-# Import necessary modules from the project
 from .time_series_features import TimeSeriesFeatureEngineer
 from .feature_selector import FeatureSelector
 
-# Define the public API of this module
 __all__ = ['TimeSeriesFeatureEngineer', 'FeatureSelector']
-```
+
